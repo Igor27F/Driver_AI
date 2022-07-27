@@ -12,14 +12,14 @@ class NeuralNetwork{
         }
         return outputs;
     }
-    static mutate(network, amount = 1){
-        network.levels.forEach(level=>{
+    static mutate(network1,amount = 1, network2){
+        network1.levels.forEach(level=>{
             for(let i=0; i<level.biases.length; i++){
-                level.biases[i] = lerp(level.biases[i], Math.random() * 2 - 1, amount);
+                level.biases[i] = lerp(level.biases[i], network2 ? network2 : Math.random() * 2 - 1, network2 ? Math.random() : amount);
             }
             for(let i=0; i<level.weights.length; i++){
                 for(let j=0; j<level.weights[i].length; j++){
-                    level.weights[i][j] = lerp(level.weights[i][j], Math.random() * 2 - 1, amount);
+                    level.weights[i][j] = lerp(level.weights[i][j], network2 ? network2 : Math.random() * 2 - 1, network2 ? Math.random() : amount);
                 }
             }
         })
